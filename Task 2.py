@@ -26,15 +26,28 @@
 # Пример:
 # - пусть N = 4, тогда [ 1, 2, 6, 24 ] (1, 1*2, 1*2*3, 1*2*3*4)
 
-x = int(input("Введите число: "))
-x = abs(x)
-k = 1
-print("[",  end = ' ')
-for i in range(x-1):
-    k = (i+1) * k
-    print(k,  end = ',')
-k = k * x
-print(k,  end = ' ]')
+# x = int(input("Введите число: "))
+# x = abs(x)
+# k = 1
+# print("[",  end = ' ')
+# for i in range(x-1):
+#     k = (i+1) * k
+#     print(k,  end = ',')
+# k = k * x
+# print(k,  end = ' ]')
 
+# Задайте список из n чисел последовательности $(1+\frac 1 n)^n$ и
+# выведите на экран их сумму.
+# Пример:
+# - Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
+
+x = int(input("Введите число: "))
+elements = list()
+s = 0
+for i in range(abs(x)):
+    elements.append((1+1/(i+1))**(i+1))
+    s = s + elements[i]
+print("Сумма:",  end = ' ')
+print(s)
 
 
