@@ -11,8 +11,16 @@ def sum(n, s):
         s = s + n % 10
         sum(int(n/10), s)
 
-x=int(input("Введите число: "))
-sum(abs(x), 0)
+x=float(input("Введите число: "))
+if x < 0:
+    x = x * (-1)
+while x % 10 != 0:
+    x = x*10
+else:
+    x = int(x / 10)
+sum(x, 0)
+
+
 
 
 
