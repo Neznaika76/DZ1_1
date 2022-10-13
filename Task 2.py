@@ -55,24 +55,44 @@
 # на указанных позициях. Позиции хранятся в файле file.txt
 # в одной строке одно число.
 
+# import random
+#
+# x = int(input("Введите число больше 10: "))
+# x = abs(x)
+# elements = list()
+# s = 1
+# for i in range(x):
+#     elements.append(random.randint((x*-1), x))
+#     print(elements[i], end=' ')
+# path = 'file.txt'
+# data = open(path, 'r')
+# text = data.read()
+# data.close()
+# data = open(path, 'r')
+# print(len(text))
+# for i in range(len(text)-1):
+#     y = int(data.read(1))
+#     s = s * elements[y]
+# data.close()
+# print("Сумма:",  end = ' ')
+# print(s)
+
+# Реализуйте алгоритм перемешивания списка.
+
 import random
 
-x = int(input("Введите число больше 10: "))
+x = int(input("Введите число размера массива: "))
 x = abs(x)
 elements = list()
-s = 1
 for i in range(x):
-    elements.append(random.randint((x*-1), x))
+    elements.append(i)
     print(elements[i], end=' ')
-path = 'file.txt'
-data = open(path, 'r')
-text = data.read()
-data.close()
-data = open(path, 'r')
-print(len(text))
-for i in range(len(text)-1):
-    y = int(data.read(1))
-    s = s * elements[y]
-data.close()
-print("Сумма:",  end = ' ')
-print(s)
+i = len(elements)
+while i > 1:
+    i = i - 1
+    j = random.randrange(i)
+    elements[j], elements[i] = elements[i], elements[j]
+print()
+print("Перемешанный массив")
+for i in range(x):
+    print(elements[i], end=' ')
