@@ -79,20 +79,47 @@
 
 # Реализуйте алгоритм перемешивания списка.
 
-import random
+# import random
+#
+# x = int(input("Введите число размера массива: "))
+# x = abs(x)
+# elements = list()
+# for i in range(x):
+#     elements.append(i)
+#     print(elements[i], end=' ')
+# i = len(elements)
+# while i > 1:
+#     i = i - 1
+#     j = random.randrange(i)
+#     elements[j], elements[i] = elements[i], elements[j]
+# print()
+# print("Перемешанный массив")
+# for i in range(x):
+#     print(elements[i], end=' ')
 
-x = int(input("Введите число размера массива: "))
-x = abs(x)
-elements = list()
-for i in range(x):
-    elements.append(i)
-    print(elements[i], end=' ')
-i = len(elements)
-while i > 1:
-    i = i - 1
-    j = random.randrange(i)
-    elements[j], elements[i] = elements[i], elements[j]
-print()
-print("Перемешанный массив")
-for i in range(x):
-    print(elements[i], end=' ')
+# ДОП. задача на алгоритмы с реальных собеседований
+# Даны два массива:
+# [1, 2, 3, 2, 0] и [5, 1, 2, 7, 3, 2]
+# Надо вернуть их пересечение
+# [1, 2, 2, 3]
+# (порядок не важен)
+
+elements1 = [1, 2, 3, 2, 0]
+elements2 = [5, 1, 2, 7, 3, 2]
+elements3 = list()
+s = 0
+for j in range(len(elements1)):
+    for i in range(len(elements2)):
+        if elements2[i]==elements1[j]:
+            for k in range(j):
+                if elements2[i]==elements3[k]:
+                    s = 1
+            if s != 1:
+                elements3.append(elements2[i])
+            else:
+                s = 0
+for j in range(len(elements3)):
+    print(elements3[j], end=' ')
+
+
+
