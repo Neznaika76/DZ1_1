@@ -2,26 +2,39 @@
 # Пример:
 # - 6782 -> 23
 # - 0,56 -> 11
-def sum(n, s):
-    if int(n/10) == 0:
-        s = s + n
-        print(s)
-        return
-    else:
-        s = s + n % 10
-        sum(int(n/10), s)
 
-x=float(input("Введите число: "))
-if x < 0:
-    x = x * (-1)
-while x % 10 != 0:
-    x = x*10
-else:
-    x = int(x / 10)
-sum(x, 0)
+# def sum(n, s):
+#     if int(n/10) == 0:
+#         s = s + n
+#         print(s)
+#         return
+#     else:
+#         s = s + n % 10
+#         sum(int(n/10), s)
+#
+# x=float(input("Введите число: "))
+# if x < 0:
+#     x = x * (-1)
+# while x % 10 != 0:
+#     x = x*10
+# else:
+#     x = int(x / 10)
+# sum(x, 0)
 
+# Напишите программу, которая принимает на вход число N и выдает набор произведений
+# чисел от 1 до N.
+# Пример:
+# - пусть N = 4, тогда [ 1, 2, 6, 24 ] (1, 1*2, 1*2*3, 1*2*3*4)
 
-
+x = int(input("Введите число: "))
+x = abs(x)
+k = 1
+print("[",  end = ' ')
+for i in range(x-1):
+    k = (i+1) * k
+    print(k,  end = ',')
+k = k * x
+print(k,  end = ' ]')
 
 
 
