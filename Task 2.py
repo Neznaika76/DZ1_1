@@ -41,13 +41,38 @@
 # Пример:
 # - Для n = 6: {1: 4, 2: 7, 3: 10, 4: 13, 5: 16, 6: 19}
 
-x = int(input("Введите число: "))
+# x = int(input("Введите число: "))
+# elements = list()
+# s = 0
+# for i in range(abs(x)):
+#     elements.append((1+1/(i+1))**(i+1))
+#     s = s + elements[i]
+# print("Сумма:",  end = ' ')
+# print(s)
+
+# Задайте список из N элементов, заполненных числами
+# из промежутка [-N, N]. Найдите произведение элементов
+# на указанных позициях. Позиции хранятся в файле file.txt
+# в одной строке одно число.
+
+import random
+
+x = int(input("Введите число больше 10: "))
+x = abs(x)
 elements = list()
-s = 0
-for i in range(abs(x)):
-    elements.append((1+1/(i+1))**(i+1))
-    s = s + elements[i]
+s = 1
+for i in range(x):
+    elements.append(random.randint((x*-1), x))
+    print(elements[i], end=' ')
+path = 'file.txt'
+data = open(path, 'r')
+text = data.read()
+data.close()
+data = open(path, 'r')
+print(len(text))
+for i in range(len(text)-1):
+    y = int(data.read(1))
+    s = s * elements[y]
+data.close()
 print("Сумма:",  end = ' ')
 print(s)
-
-
