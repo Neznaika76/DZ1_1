@@ -93,30 +93,62 @@ import math
 # - 45 -> 101101
 # - 3 -> 11
 # - 2 -> 10
+#
+# def binary_elements(n): # Функция записывает в стоку остаток от деления на 2
+#     elements = []
+#     while n // 2 > 0:
+#         elements.append(int(n % 2))
+#         n = n // 2
+#     elements.append(int(n % 2))
+#     return elements
+#
+#
+# def replacement_elements(elements): # Функция меняет местами элементы строки
+#     i = 0
+#     while i < (math.ceil(len(elements) / 2)):
+#         elements[i], elements[(i + 1) * (-1)] = elements[(i + 1) * (-1)], elements[i]
+#         i += 1
+#     return elements
+#
+#
+# def output_elements(elements): # Функция выводит элементы строки
+#     for i in range(len(elements)):
+#         print(elements[i], end='')
+#
+#
+# n = int(input('Введите число: '))
+# n = abs(n)
+#
+# output_elements(replacement_elements(binary_elements(n)))
 
-def binary_elements(n): # Функция записывает в стоку остаток от деления на 2
+# Задайте число. Составьте список чисел Фибоначчи, в том числе для
+# отрицательных индексов.
+
+def fibonachchy(n): # Функция находит положительные числа Фибоначчи
+    f1 = 0
+    f2 = 1
     elements = []
-    while n // 2 > 0:
-        elements.append(int(n % 2))
-        n = n // 2
-    elements.append(int(n % 2))
+    for _ in range(n):
+        elements.append(int(f2))
+        f1 = f1 + f2
+        f1, f2 = f2, f1
     return elements
 
 
-def replacement_elements(elements): # Функция меняет местами элементы строки
-    i = 0
-    while i < (math.ceil(len(elements) / 2)):
-        elements[i], elements[(i + 1) * (-1)] = elements[(i + 1) * (-1)], elements[i]
-        i += 1
-    return elements
-
-
-def output_elements(elements): # Функция выводит элементы строки
+def fibonachchy_elements(elements): # Функция составляет список для отрицательных и положительных индексов чисел Фибоначи
+    fib_elements = []
     for i in range(len(elements)):
-        print(elements[i], end='')
+        if i % 2 != 0:
+            fib_elements.append(int(elements[-(i+1)]))
+        else:
+            fib_elements.append(int(elements[-(i+1)]*(-1)))
+    fib_elements.append(int(0))
+    for i in range(len(elements)):
+        fib_elements.append(int(elements[i]))
+    return fib_elements
 
 
 n = int(input('Введите число: '))
 n = abs(n)
+print(fibonachchy_elements(fibonachchy(n)))
 
-output_elements(replacement_elements(binary_elements(n)))
