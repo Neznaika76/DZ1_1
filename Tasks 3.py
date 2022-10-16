@@ -55,35 +55,68 @@
 import random
 import math
 
+#
+# def add_elements(n):    # Функци создает список размером n
+#     elements_add = []
+#
+#     for _ in range(n):
+#         elements_add.append(format(random.uniform(1, 20), '.2f'))
+#     print(elements_add)
+#     return elements_add
+#
+#
+# def transformation_elements(transformation_elements):   # функция выводит список только двух чисел после замятой
+#     for i in range(len(transformation_elements)):
+#         transformation_elements[i] = int(float(transformation_elements[i]) * 100) % 100
+#     print(transformation_elements)
+#     return transformation_elements
+#
+#
+# def max_min_elements(max_min_elements): # Функция находит разницу между максимальной и минимальной дробной частью
+#     max = max_min_elements[0]
+#     min = max_min_elements[0]
+#     for i in range(len(max_min_elements)):
+#         if max_min_elements[i] > max:
+#             max = max_min_elements[i]
+#         elif max_min_elements[i] < min:
+#             min = max_min_elements[i]
+#     print(f'Разница между максимальной и минимальной доробной части равна 0.{max - min}')
+#
+#
+#
+# n = int(input('Введите число: '))
+# n = abs(n)
+# max_min_elements(transformation_elements(add_elements(n)))
+#
+# Напишите программу, которая будет преобразовывать десятичное число в двоичное.
+# Пример:
+# - 45 -> 101101
+# - 3 -> 11
+# - 2 -> 10
 
-def add_elements(n):    # Функци создает список размером n
-    elements_add = []
-
-    for _ in range(n):
-        elements_add.append(format(random.uniform(1, 20), '.2f'))
-    print(elements_add)
-    return elements_add
-
-
-def transformation_elements(transformation_elements):   # функция выводит список только двух чисел после замятой
-    for i in range(len(transformation_elements)):
-        transformation_elements[i] = int(float(transformation_elements[i]) * 100) % 100
-    print(transformation_elements)
-    return transformation_elements
+def binary_elements(n): # Функция записывает в стоку остаток от деления на 2
+    elements = []
+    while n // 2 > 0:
+        elements.append(int(n % 2))
+        n = n // 2
+    elements.append(int(n % 2))
+    return elements
 
 
-def max_min_elements(max_min_elements): # Функция находит разницу между максимальной и минимальной дробной частью
-    max = max_min_elements[0]
-    min = max_min_elements[0]
-    for i in range(len(max_min_elements)):
-        if max_min_elements[i] > max:
-            max = max_min_elements[i]
-        elif max_min_elements[i] < min:
-            min = max_min_elements[i]
-    print(f'Разница между максимальной и минимальной доробной части равна 0.{max - min}')
+def replacement_elements(elements): # Функция меняет местами элементы строки
+    i = 0
+    while i < (math.ceil(len(elements) / 2)):
+        elements[i], elements[(i + 1) * (-1)] = elements[(i + 1) * (-1)], elements[i]
+        i += 1
+    return elements
 
+
+def output_elements(elements): # Функция выводит элементы строки
+    for i in range(len(elements)):
+        print(elements[i], end='')
 
 
 n = int(input('Введите число: '))
 n = abs(n)
-max_min_elements(transformation_elements(add_elements(n)))
+
+output_elements(replacement_elements(binary_elements(n)))
