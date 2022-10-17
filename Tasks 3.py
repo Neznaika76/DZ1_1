@@ -123,32 +123,108 @@ import math
 
 # Задайте число. Составьте список чисел Фибоначчи, в том числе для
 # отрицательных индексов.
+#
+# def fibonachchy(n): # Функция находит положительные числа Фибоначчи
+#     f1 = 0
+#     f2 = 1
+#     elements = []
+#     for _ in range(n):
+#         elements.append(int(f2))
+#         f1 = f1 + f2
+#         f1, f2 = f2, f1
+#     return elements
+#
+#
+# def fibonachchy_elements(elements): # Функция составляет список для отрицательных и положительных индексов чисел Фибоначи
+#     fib_elements = []
+#     for i in range(len(elements)):
+#         if i % 2 != 0:
+#             fib_elements.append(int(elements[-(i+1)]))
+#         else:
+#             fib_elements.append(int(elements[-(i+1)]*(-1)))
+#     fib_elements.append(int(0))
+#     for i in range(len(elements)):
+#         fib_elements.append(int(elements[i]))
+#     return fib_elements
+#
+#
+# n = int(input('Введите число: '))
+# n = abs(n)
+# print(fibonachchy_elements(fibonachchy(n)))
 
-def fibonachchy(n): # Функция находит положительные числа Фибоначчи
-    f1 = 0
-    f2 = 1
-    elements = []
-    for _ in range(n):
-        elements.append(int(f2))
-        f1 = f1 + f2
-        f1, f2 = f2, f1
-    return elements
+
+# Написать программу, которая группирует слова по «общим буквам»
+# n = int(input('Введите число: '))
 
 
-def fibonachchy_elements(elements): # Функция составляет список для отрицательных и положительных индексов чисел Фибоначи
-    fib_elements = []
-    for i in range(len(elements)):
-        if i % 2 != 0:
-            fib_elements.append(int(elements[-(i+1)]))
-        else:
-            fib_elements.append(int(elements[-(i+1)]*(-1)))
-    fib_elements.append(int(0))
-    for i in range(len(elements)):
-        fib_elements.append(int(elements[i]))
-    return fib_elements
+def find(elements, n): # Функция находит все слова с одинаковыми буквами и выводт доплнительный список в котором записаны на местах совпадения символо 1, на местах не совпадения символов 0
+    str_mask = []
+    for _ in range(len(elements)):
+        str_mask.append(' ')
+    while elements[n] != ' ':
+        for j in range(len(elements)):
+            if elements[n] == elements[j]:
+                str_mask[j] = 1
+            else:
+                if str_mask[j] != 1 and elements[j] != ' ':
+                    str_mask[j] = 0
+        n += 1
+        # print(n, end='')
+        if n >= len(elements):
+            break
+    return str_mask
 
 
-n = int(input('Введите число: '))
-n = abs(n)
-print(fibonachchy_elements(fibonachchy(n)))
+def proizvedenie(elements, x, y): # Функция выводит значение 1, если все символы слова совпадают, и значение 0 если хотя бы один символ не совпадает
+    s = 1
+    while x <= y:
+        s = s * int(elements[x])
+        x += 1
+    return s
+
+
+def zamena(elements1, elements2, x, y): # Функия сортирует элементы с одинаковыми символами
+    for z in range((len(elements2) // y)):
+        p1 = x + y * z
+        p2 = p1 + y - 2
+        elements1 = list(elements1)
+        if p1+y < len(elements2):
+            if proizvedenie(elements2, p1, p2) != 1 and proizvedenie(elements2, p1 + y, p2 + y) == 1:
+                for q in range(y-1):
+                    elements2[p1 + q], elements2[p1 + y + q] = elements2[p1 + y + q], elements2[p1 + q]
+                    elements1[p1 + q], elements1[p1 + y + q] = elements1[p1 + y + q], elements1[p1 + q]
+    return elements1
+
+
+def poisk(elements2, y): # Функия находит первую позицию элемента, который еще не отсортирован
+    position1 = 0
+    for z in range((len(elements2) // y)):
+        p1 = y * z
+        p2 = p1 + y - 2
+        if p1 < len(elements2):
+            if proizvedenie(elements2, p1, p2) == 1 and proizvedenie(elements2, p1 + y, p2 + y) != 1:
+                if position1 == 0:
+                    position1 = p1 + y # Следующая позиция знака
+    return position1
+
+
+str1 = input("Введите слова через пробел : ")
+str2 = []
+i = 0
+k = i # Позиция символа
+while i + k < len(str1):
+    str2 = find(str1, i)
+    k = i
+    j = 0
+    while str1[i] != ' ': # Проходим первое слово до пробела и определяем его длинну
+        i += 1
+        j += 1
+        if i >= len(str1):
+            break
+    j += 1 # длинна слова
+    i = poisk(str2, j)
+    str1 = zamena(str1, str2, i, j)
+print(str1)
+
+
 
